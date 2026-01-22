@@ -1,0 +1,2324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Bloomily Market Primer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #F7B944;
+            --primary-light: #FCD57A;
+            --primary-dark: #D99B2B;
+            --primary-bg: #FEF9E7;
+            --success: #10B981;
+            --success-bg: #D1FAE5;
+            --warning: #F59E0B;
+            --warning-bg: #FEF3C7;
+            --danger: #EF4444;
+            --danger-bg: #FEE2E2;
+            --info: #3B82F6;
+            --info-bg: #DBEAFE;
+            --purple: #8B5CF6;
+            --purple-bg: #EDE9FE;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-500: #6B7280;
+            --gray-700: #374151;
+            --gray-900: #111827;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-700);
+            background: var(--gray-50);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--gray-900);
+            padding: 40px 20px;
+            text-align: center;
+            margin: -20px -20px 30px -20px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: white;
+        }
+
+        .header p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 12px;
+        }
+
+        /* Sections */
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin: 20px 0 12px 0;
+        }
+
+        /* Key Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--gray-50);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--gray-200);
+        }
+
+        .stat-card.highlight {
+            background: var(--primary-bg);
+            border: 1px solid var(--primary-light);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .stat-card.highlight .stat-value {
+            color: var(--primary-dark);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+            margin-top: 4px;
+        }
+
+        /* Tables */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        th, td {
+            padding: 10px 8px;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        th {
+            background: var(--gray-100);
+            font-weight: 600;
+            color: var(--gray-900);
+            white-space: nowrap;
+        }
+
+        tr:hover {
+            background: var(--gray-50);
+        }
+
+        .check { color: var(--success); font-weight: bold; }
+        .cross { color: var(--danger); }
+        .partial { color: var(--warning); }
+
+        /* Callout Boxes - Different Colors */
+        .callout {
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+            border-left: 4px solid;
+        }
+
+        .callout-primary {
+            background: var(--primary-bg);
+            border-color: var(--primary);
+        }
+
+        .callout-success {
+            background: var(--success-bg);
+            border-color: var(--success);
+        }
+
+        .callout-warning {
+            background: var(--warning-bg);
+            border-color: var(--warning);
+        }
+
+        .callout-danger {
+            background: var(--danger-bg);
+            border-color: var(--danger);
+        }
+
+        .callout-info {
+            background: var(--info-bg);
+            border-color: var(--info);
+        }
+
+        .callout-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .card {
+            background: var(--gray-50);
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .card-title {
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 8px;
+        }
+
+        /* Competitor Cards */
+        .competitor-card {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 12px 0;
+        }
+
+        .competitor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .competitor-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--gray-900);
+        }
+
+        .competitor-name a {
+            color: var(--info);
+            text-decoration: none;
+        }
+
+        .competitor-name a:hover {
+            text-decoration: underline;
+        }
+
+        .competitor-badges {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .badge-leader { background: var(--info-bg); color: var(--info); }
+        .badge-legacy { background: var(--gray-200); color: var(--gray-700); }
+        .badge-rising { background: var(--success-bg); color: var(--success); }
+        .badge-acquired { background: var(--purple-bg); color: var(--purple); }
+        .badge-enterprise { background: var(--warning-bg); color: #B45309; }
+
+        .competitor-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+
+        .pros-cons {
+            font-size: 0.9rem;
+        }
+
+        .pros-cons h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .pros-cons h4.pros { color: var(--success); }
+        .pros-cons h4.cons { color: var(--danger); }
+
+        .pros-cons ul {
+            margin-left: 16px;
+            color: var(--gray-600);
+        }
+
+        .pros-cons li {
+            margin: 3px 0;
+        }
+
+        .competitor-meta {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--gray-100);
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--gray-400);
+        }
+
+        .meta-value {
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        /* Difficulty Indicator */
+        .difficulty {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        .difficulty-easy {
+            background: var(--success-bg);
+            color: #047857;
+        }
+
+        .difficulty-medium {
+            background: var(--warning-bg);
+            color: #B45309;
+        }
+
+        .difficulty-hard {
+            background: var(--danger-bg);
+            color: #B91C1C;
+        }
+
+        /* Feature Matrix */
+        .matrix-table th:first-child {
+            min-width: 180px;
+        }
+
+        .matrix-table th {
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        .matrix-table th:not(:first-child) {
+            min-width: 80px;
+        }
+
+        .matrix-table td:not(:first-child) {
+            text-align: center;
+        }
+
+        .matrix-table .bloomily-col {
+            background: var(--primary-bg);
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: var(--gray-100);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+
+        .toc-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--gray-900);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 6px;
+        }
+
+        .toc-list a {
+            color: var(--info);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Strategy Box */
+        .strategy-box {
+            background: var(--gray-900);
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 16px 0;
+        }
+
+        .strategy-box h4 {
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .strategy-box ul {
+            margin-left: 20px;
+        }
+
+        .strategy-box li {
+            margin: 8px 0;
+        }
+
+        /* Key Points */
+        .key-point {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            background: var(--gray-50);
+            border-radius: 8px;
+            margin: 8px 0;
+            align-items: flex-start;
+        }
+
+        .key-point-number {
+            width: 28px;
+            height: 28px;
+            background: var(--gray-900);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--gray-500);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.5rem; }
+            .competitor-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 4px; }
+            .competitor-meta { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* Print Styles */
+        @media print {
+            .container { max-width: 100%; }
+            .section { break-inside: avoid; box-shadow: none; border: 1px solid var(--gray-200); }
+            .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            a { text-decoration: none !important; color: inherit !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <svg class="logo-icon" viewBox="0 0 2464 2284">
+                <path fill="#FECB45" d="M819.56 640.098C818.908 533.781 865.586 423.15 946.431 347.291C1005.4 291.508 1081.93 254.496 1165.02 241.578C1290.65 221.342 1416.97 267.374 1506.01 349.706C1598.2 434.955 1629.59 523.347 1634.83 641.63C1646.75 636.973 1658.52 632.644 1671.07 629.663C1853.67 586.269 2022.64 687.808 2091.24 841.377C2135 939.544 2135.19 1049.76 2091.75 1148.05C2055.3 1229.63 1979.54 1304.94 1890.71 1337.06C1880.51 1340.75 1863.47 1346.61 1854.17 1350.87C1919.87 1419.06 1948.13 1526.23 1942.49 1615.84C1935.99 1719.05 1887.68 1823.38 1802.72 1891.99C1638.48 2024.61 1392.77 2014.64 1248.45 1861.33C1241.07 1853.56 1233.89 1845.64 1226.91 1837.57C1144.84 1923.42 1070.48 1974.74 940.255 1982.65C835.17 1989.04 739.754 1959.52 660.556 1894.62C573.815 1823.27 522.976 1729.2 516.759 1621.45C511.161 1524.44 533.922 1426.74 602.165 1350.32C575.408 1339.84 538.799 1325.04 514.207 1310.54C449.475 1272.35 391.401 1209.78 362.882 1143.77C319.438 1043.2 323.559 930.822 369.294 831.566C371.404 826.987 383.535 802.533 386.591 799.529C398.323 776.723 420.538 749.319 438.512 730.767C492.522 670.931 580.765 626.322 664.402 620.465C725.487 616.187 762.967 624.729 819.56 640.098Z"/>
+                <path fill="#FEFEFE" d="M1629.39 983.927C1638.01 983.159 1647.04 983.232 1655.45 985.33C1669.38 988.805 1680.31 997.033 1687.34 1008.66C1695.1 1021.5 1697.32 1037 1695.58 1051.5C1687.69 1117.29 1611.92 1160.48 1559.59 1196.57C1530.79 1216.44 1501.46 1235.93 1475 1258.48C1453.95 1276.43 1435.23 1297.66 1423.46 1321.98C1353.07 1467.44 1535.47 1621.35 1505.4 1723.13C1500.83 1738.59 1490.52 1750.46 1475.24 1758.06C1459.7 1765.79 1440.73 1768.49 1423.34 1766.13C1324.24 1752.69 1296.04 1598.38 1233.94 1583.03C1197.82 1574.1 1169.16 1629.92 1154.5 1652.95C1145.24 1667.5 1135.78 1682.1 1125.42 1696C1107.54 1719.99 1086.47 1743.57 1058.71 1758.11C1039.33 1768.27 1018.24 1770.73 996.775 1765.08C978.037 1760.16 959.401 1748.98 950.196 1732.7C936.106 1707.78 944.359 1677.63 952.832 1652.4C980.58 1576.96 1030.11 1506.04 1042.53 1426.36C1061.55 1304.4 973.943 1248 879.393 1185.94C845.392 1163.62 810.589 1140.52 785.138 1109.48C773.033 1094.71 762.743 1078.01 758.804 1059.65C755.255 1043.09 757.108 1023.9 767.894 1009.82C776.588 998.471 789.974 992.599 804.521 990.577C890.913 978.565 1050.96 1067.38 1121 1113.34C1152.35 1133.91 1180.83 1158.44 1211.97 1179.36C1217.31 1182.94 1224.44 1187.96 1231.3 1187.6C1237.08 1187.29 1243.77 1182.61 1248.25 1179.45C1263.72 1168.5 1276.98 1154.91 1291.68 1143.09C1320.82 1119.67 1352.58 1097.61 1385.23 1078.53C1457.43 1036.33 1544.44 996.375 1629.39 983.927Z"/>
+                <path fill="#FEFEFE" d="M1216.3 633.912C1319.23 631.876 1393.32 699.392 1403.85 792.862C1409.08 842.276 1392.97 891.597 1359.07 930.033C1329.87 963.009 1287.73 983.868 1241.93 988.007C1137.14 992.704 1060.41 921.504 1050.42 826.923C1045.73 778.387 1061.67 730.071 1094.84 692.268C1127.44 655.5 1166.24 638.546 1216.3 633.912Z"/>
+            </svg>
+            <h1>Bloomily Market Primer</h1>
+            <p>Understanding the Childcare & Camp Software Industry</p>
+        </div>
+
+        <nav class="toc">
+            <div class="toc-title">Quick Navigation</div>
+            <ul class="toc-list">
+                <li><a href="#tldr">Executive Summary</a></li>
+                <li><a href="#industry101">Industry 101</a></li>
+                <li><a href="#whynow">Why Now</a></li>
+                <li><a href="#market">Global Market</a></li>
+                <li><a href="#segments">Market Segments</a></li>
+                <li><a href="#childcare">Childcare Competitors</a></li>
+                <li><a href="#camps">Camp Competitors</a></li>
+                <li><a href="#matrix">Feature Matrix</a></li>
+                <li><a href="#pricing">Pricing & Revenue</a></li>
+                <li><a href="#compete">How to Compete</a></li>
+                <li><a href="#risks">Risks & Challenges</a></li>
+                <li><a href="#takeaways">Key Takeaways</a></li>
+            </ul>
+        </nav>
+
+        <!-- EXECUTIVE SUMMARY -->
+        <section class="section" id="tldr">
+            <h2 class="section-title">Executive Summary</h2>
+
+            <div class="callout callout-primary">
+                <div class="callout-title">The Opportunity in One Sentence</div>
+                <p style="font-size: 1.1rem;"><strong>Bloomily is building the first unified platform for childcare centers AND camps</strong> — two $500M+ software markets that have never been combined, leaving thousands of organizations stuck using two disconnected systems.</p>
+            </div>
+
+            <h3 class="section-subtitle">Why This Matters</h3>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-title">🎯 Clear Market Gap</div>
+                    <p style="font-size: 0.9rem; color: var(--gray-600);">
+                        Organizations running both childcare and camps (preschools, community centers, churches) are forced to use two separate software systems. No competitor serves both.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-title">💰 Strong Unit Economics</div>
+                    <p style="font-size: 0.9rem; color: var(--gray-600);">
+                        SaaS subscription revenue + payment processing margins (0.3% net on every transaction). A 100-child center generates ~$7,000/year in combined revenue (subscription + processing).
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📈 Growing Market</div>
+                    <p style="font-size: 0.9rem; color: var(--gray-600);">
+                        Combined TAM of $800M growing 7-8% annually. Digital adoption accelerating as legacy providers age out and parents demand modern experiences.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-title">⚡ Technical Advantage</div>
+                    <p style="font-size: 0.9rem; color: var(--gray-600);">
+                        Built 2025-2026 with modern stack (Next.js, SwiftUI, Kotlin). Competitors run on 10-30 year old codebases. We have features they can't easily replicate.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Bloomily at a Glance</h3>
+
+            <div class="table-wrapper">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><strong>What we do</strong></td>
+                            <td>All-in-one software for childcare centers and camps: enrollment, billing, attendance, daily reports, parent communication, and website builder</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Target customers</strong></td>
+                            <td>Preschools, daycares, day camps, community centers, churches — especially those running both year-round childcare AND seasonal camps</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Business model</strong></td>
+                            <td>SaaS subscription ($79-399/month) + payment processing revenue (0.7% margin on tuition/fees)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Key differentiator</strong></td>
+                            <td>Only platform architecturally built for both childcare AND camps. Flat pricing (no per-child fees). Native mobile apps. NFC check-in.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Team background</strong></td>
+                            <td>Engineering experience from Google, Uber, and CloudKitchens</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stage</strong></td>
+                            <td>Product built, launching to market</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- INDUSTRY 101 -->
+        <section class="section" id="industry101">
+            <h2 class="section-title">Industry 101: How Childcare & Camps Work</h2>
+
+            <p style="margin-bottom: 16px;">If you're new to this industry, here's a quick primer on how these businesses operate and why software matters.</p>
+
+            <h3 class="section-subtitle">The Childcare Business Model</h3>
+
+            <div class="callout callout-info">
+                <div class="callout-title">How Childcare Centers Make Money</div>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Revenue:</strong> Monthly tuition ($800-2,500/child/month depending on location and age)</li>
+                    <li><strong>Capacity:</strong> Most centers serve 50-200 children</li>
+                    <li><strong>Staffing:</strong> State-mandated ratios (e.g., 1 teacher per 4 infants, 1 per 10 preschoolers)</li>
+                    <li><strong>Margins:</strong> Typically 10-20% net margin — labor is the biggest cost</li>
+                    <li><strong>Retention:</strong> Families stay 2-4 years on average (until kindergarten)</li>
+                </ul>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-title">📋 Daily Operations</div>
+                    <p style="font-size: 0.85rem; color: var(--gray-600);">
+                        Check kids in/out, track meals and naps, log diaper changes, record learning activities, take photos, communicate with parents throughout the day.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-title">💵 Billing Challenges</div>
+                    <p style="font-size: 0.85rem; color: var(--gray-600);">
+                        Collect tuition (often late), handle subsidies, track late pickup fees, manage sibling discounts, reconcile payments. Cash flow is constant struggle.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📝 Compliance</div>
+                    <p style="font-size: 0.85rem; color: var(--gray-600);">
+                        State licensing requires staff-to-child ratios, health records, immunization tracking, incident reports, and regular inspections.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-title">👨‍👩‍👧 Parent Expectations</div>
+                    <p style="font-size: 0.85rem; color: var(--gray-600);">
+                        Modern parents expect real-time updates, photos, and an app. They compare centers partly based on how "professional" the technology looks.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">The Camp Business Model</h3>
+
+            <div class="callout callout-info">
+                <div class="callout-title">How Camps Make Money</div>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Revenue:</strong> Per-session fees ($200-600/week for day camps, $1,000-3,000/week for overnight)</li>
+                    <li><strong>Seasonality:</strong> Most revenue in summer (June-August), some break camps</li>
+                    <li><strong>Registration:</strong> Opens January-February, peak sign-ups by April</li>
+                    <li><strong>Capacity:</strong> Day camps: 50-500 campers/week. Overnight: 100-1,000 per session.</li>
+                    <li><strong>Margins:</strong> 15-30% for well-run camps — higher than childcare</li>
+                </ul>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-title">🗓️ Session-Based</div>
+                    <p style="font-size: 0.85rem; color: var(--gray-600);">
+                        Unlike childcare's ongoing enrollment, camps sell discrete sessions (Week 1, Week 2, etc.) with different themes, activities, or age groups.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🎨 Activity Selection</div>
+                    <p style="font-size: 0.85rem; color: var(--gray-600);">
+                        Campers often choose activities (swimming, archery, arts) or "tracks" (sports track, STEM track). Registration is more complex than childcare.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-title">💳 Payment Plans</div>
+                    <p style="font-size: 0.85rem; color: var(--gray-600);">
+                        Camps collect deposits in winter, balance due before camp starts. Payment plans, early bird discounts, and sibling discounts are common.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📸 Parent Communication</div>
+                    <p style="font-size: 0.85rem; color: var(--gray-600);">
+                        Less frequent than childcare — end-of-day photos rather than real-time updates. But parents still expect an app and easy access.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Why Software Matters</h3>
+
+            <div class="strategy-box">
+                <h4>Software Is Now Table Stakes</h4>
+                <ul>
+                    <li><strong>Parents expect it:</strong> No app = looks unprofessional = lose families to competitors</li>
+                    <li><strong>Directors need it:</strong> Manual billing, paper forms, and phone calls don't scale</li>
+                    <li><strong>Staff demand it:</strong> Younger teachers won't work somewhere with clipboard-based operations</li>
+                    <li><strong>Compliance requires it:</strong> Digital records for attendance, health, and incidents</li>
+                    <li><strong>Billing depends on it:</strong> AutoPay reduces late payments from 30% to under 5%</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- WHY NOW -->
+        <section class="section" id="whynow">
+            <h2 class="section-title">Why Now: Market Timing</h2>
+
+            <div class="callout callout-success">
+                <div class="callout-title">Several Forces Are Creating a Window of Opportunity</div>
+            </div>
+
+            <div class="key-point">
+                <span class="key-point-number">1</span>
+                <div>
+                    <strong>Generational shift in directors.</strong> Baby Boomer directors who resisted technology are retiring. Millennial directors expect modern software and won't tolerate legacy systems.
+                </div>
+            </div>
+
+            <div class="key-point">
+                <span class="key-point-number">2</span>
+                <div>
+                    <strong>Parent expectations have changed.</strong> Post-COVID, parents expect real-time updates, mobile apps, and digital payments. Centers without modern tech lose families.
+                </div>
+            </div>
+
+            <div class="key-point">
+                <span class="key-point-number">3</span>
+                <div>
+                    <strong>Legacy platforms are showing their age.</strong> ProCare (1992), CampMinder (2001), and CampBrain (1994) have decades of technical debt. They can't easily rebuild for mobile-first.
+                </div>
+            </div>
+
+            <div class="key-point">
+                <span class="key-point-number">4</span>
+                <div>
+                    <strong>Hybrid programs are growing.</strong> Preschools are adding summer camps for revenue. Camps want year-round engagement. Neither market's software supports both — except Bloomily.
+                </div>
+            </div>
+
+            <div class="key-point">
+                <span class="key-point-number">5</span>
+                <div>
+                    <strong>PE consolidation is underway.</strong> Roper bought ProCare. Bain invested in Lillio. DaySmart bought Sawyer. This signals market maturity and validates the opportunity — but also means incumbents may get slower and more bureaucratic.
+                </div>
+            </div>
+
+            <div class="key-point">
+                <span class="key-point-number">6</span>
+                <div>
+                    <strong>AI is creating new possibilities.</strong> Predictive staffing, arrival time forecasting, and automated communication are becoming possible. Legacy codebases can't easily add AI features; we can.
+                </div>
+            </div>
+        </section>
+
+        <!-- GLOBAL MARKET -->
+        <section class="section" id="market">
+            <h2 class="section-title">Global Market Opportunity</h2>
+
+            <h3 class="section-subtitle">Worldwide Market Size (2025)</h3>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">$650M</div>
+                    <div class="stat-label">Global Childcare<br>Software (2025)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">$150M</div>
+                    <div class="stat-label">Global Camp<br>Software (2025)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">7-8%</div>
+                    <div class="stat-label">Annual Growth<br>Rate (CAGR)</div>
+                </div>
+                <div class="stat-card highlight">
+                    <div class="stat-value">$1.2B+</div>
+                    <div class="stat-label">Combined Market<br>by 2030</div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Market Size by Region (2025)</h3>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Region</th>
+                            <th>Childcare Software</th>
+                            <th>Camp Software</th>
+                            <th>Combined</th>
+                            <th>Share</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>United States</strong></td>
+                            <td>$195M</td>
+                            <td>$59M</td>
+                            <td><strong>$254M</strong></td>
+                            <td>32%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Canada</strong></td>
+                            <td>$26M</td>
+                            <td>$3M</td>
+                            <td><strong>$29M</strong></td>
+                            <td>4%</td>
+                        </tr>
+                        <tr>
+                            <td>Europe</td>
+                            <td>$182M</td>
+                            <td>$35M</td>
+                            <td>$217M</td>
+                            <td>27%</td>
+                        </tr>
+                        <tr>
+                            <td>Asia-Pacific</td>
+                            <td>$169M</td>
+                            <td>$38M</td>
+                            <td>$207M</td>
+                            <td>26%</td>
+                        </tr>
+                        <tr>
+                            <td>Rest of World</td>
+                            <td>$78M</td>
+                            <td>$15M</td>
+                            <td>$93M</td>
+                            <td>11%</td>
+                        </tr>
+                        <tr style="background: var(--gray-100); font-weight: 600;">
+                            <td>Total</td>
+                            <td>$650M</td>
+                            <td>$150M</td>
+                            <td>$800M</td>
+                            <td>100%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout callout-info">
+                <div class="callout-title">Canada Market Insight</div>
+                Canada has 54% cloud-based adoption rate in childcare software. Government initiatives like the Canada Early Learning and Child Care Act are driving 21% annual growth in platform subscriptions. ~8,700 centers now use digital billing and check-in systems.
+            </div>
+
+            <h3 class="section-subtitle">Market Growth Projections</h3>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Market</th>
+                            <th>2025</th>
+                            <th>2028</th>
+                            <th>2032</th>
+                            <th>CAGR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Childcare Software (Global)</td>
+                            <td>$650M</td>
+                            <td>$865M</td>
+                            <td>$1.1B</td>
+                            <td><strong>7.6%</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Camp Software (Global)</td>
+                            <td>$150M</td>
+                            <td>$200M</td>
+                            <td>$280M</td>
+                            <td><strong>8.2%</strong></td>
+                        </tr>
+                        <tr>
+                            <td>North America Childcare</td>
+                            <td>$221M</td>
+                            <td>$295M</td>
+                            <td>$390M</td>
+                            <td><strong>8.5%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- MARKET SEGMENTS -->
+        <section class="section" id="segments">
+            <h2 class="section-title">Market Segments & Scale</h2>
+
+            <h3 class="section-subtitle">Addressable Organizations</h3>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Segment</th>
+                            <th>US Count</th>
+                            <th>Canada</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Licensed childcare centers</td>
+                            <td><strong>~500,000</strong></td>
+                            <td>~9,000</td>
+                            <td>Daycares, preschools, Head Start</td>
+                        </tr>
+                        <tr>
+                            <td>Day camps</td>
+                            <td><strong>~14,000</strong></td>
+                            <td>~1,500</td>
+                            <td>ACA-accredited</td>
+                        </tr>
+                        <tr>
+                            <td>Overnight camps</td>
+                            <td><strong>~7,000</strong></td>
+                            <td>~900</td>
+                            <td>Residential summer camps</td>
+                        </tr>
+                        <tr>
+                            <td>Community centers</td>
+                            <td><strong>~13,000</strong></td>
+                            <td>~1,200</td>
+                            <td>YMCAs, JCCs, Parks & Rec — run both</td>
+                        </tr>
+                        <tr>
+                            <td>Private schools with childcare</td>
+                            <td><strong>~35,000</strong></td>
+                            <td>~2,500</td>
+                            <td>Pre-K + summer programs</td>
+                        </tr>
+                        <tr>
+                            <td>Churches with programs</td>
+                            <td><strong>~50,000</strong></td>
+                            <td>~3,000</td>
+                            <td>Preschools + VBS/camps</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout callout-primary">
+                <div class="callout-title">The Core Insight</div>
+                Childcare software and camp software evolved as completely separate industries. Organizations running both are forced to use two systems that don't talk to each other. <strong>Bloomily is the only platform built to serve both.</strong>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-title">Childcare Software Built For:</div>
+                    <ul style="margin-left: 16px; color: var(--gray-600); font-size: 0.9rem;">
+                        <li>Year-round daily operations</li>
+                        <li>Meal, nap, diaper tracking</li>
+                        <li>Recurring monthly tuition</li>
+                        <li>Child development assessments</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title">Camp Software Built For:</div>
+                    <ul style="margin-left: 16px; color: var(--gray-600); font-size: 0.9rem;">
+                        <li>Seasonal registration</li>
+                        <li>Session-based enrollment</li>
+                        <li>Deposit + balance billing</li>
+                        <li>Activity/track selection</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHILDCARE COMPETITORS -->
+        <section class="section" id="childcare">
+            <h2 class="section-title">Childcare Software Competitors</h2>
+
+            <!-- Brightwheel -->
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <span class="competitor-name"><a href="https://mybrightwheel.com" target="_blank">Brightwheel</a></span>
+                    <div class="competitor-badges">
+                        <span class="badge badge-leader">Market Leader</span>
+                    </div>
+                </div>
+
+                <div class="competitor-grid">
+                    <div class="pros-cons">
+                        <h4 class="pros">✓ Why customers stay</h4>
+                        <ul>
+                            <li>Strong brand recognition & trust</li>
+                            <li>Experience Curriculum integration</li>
+                            <li>Payroll & HR features built-in</li>
+                            <li>Large support team & resources</li>
+                            <li>Established, "safe" choice</li>
+                        </ul>
+                    </div>
+                    <div class="pros-cons">
+                        <h4 class="cons">✗ Weaknesses / Gaps</h4>
+                        <ul>
+                            <li>No camp registration features</li>
+                            <li>Per-child pricing gets expensive</li>
+                            <li>No session-based enrollment</li>
+                            <li>No NFC check-in</li>
+                            <li>No website builder included</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="competitor-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Founded</span>
+                        <span class="meta-value">2014</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Employees</span>
+                        <span class="meta-value">~500</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Customers</span>
+                        <span class="meta-value">8,000+ centers</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Revenue (est.)</span>
+                        <span class="meta-value">$84M/year</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Funding</span>
+                        <span class="meta-value">$600M+ raised</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Pricing</span>
+                        <span class="meta-value">$3-6/child/mo</span>
+                    </div>
+                </div>
+
+                <div class="difficulty difficulty-hard">
+                    <strong>Difficulty to Compete:</strong> HARD — Strong brand, deep pockets, established trust. Win on camps + flat pricing.
+                </div>
+            </div>
+
+            <!-- ProCare -->
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <span class="competitor-name"><a href="https://www.procaresoftware.com" target="_blank">ProCare Solutions</a></span>
+                    <div class="competitor-badges">
+                        <span class="badge badge-legacy">Legacy Leader</span>
+                        <span class="badge badge-acquired">Acquired by Roper 2024</span>
+                    </div>
+                </div>
+
+                <div class="competitor-grid">
+                    <div class="pros-cons">
+                        <h4 class="pros">✓ Why customers stay</h4>
+                        <ul>
+                            <li>30+ years of reliability</li>
+                            <li>Comprehensive compliance tools</li>
+                            <li>CACFP food program support</li>
+                            <li>Full payroll integration</li>
+                            <li>Huge installed base (40K+)</li>
+                        </ul>
+                    </div>
+                    <div class="pros-cons">
+                        <h4 class="cons">✗ Weaknesses / Gaps</h4>
+                        <ul>
+                            <li>Dated, complex interface</li>
+                            <li>Steep learning curve</li>
+                            <li>No camp features</li>
+                            <li>Legacy technology stack</li>
+                            <li>Module-based pricing adds up</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="competitor-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Founded</span>
+                        <span class="meta-value">1992</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Employees</span>
+                        <span class="meta-value">~445</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Customers</span>
+                        <span class="meta-value">40,000+ centers</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Owner</span>
+                        <span class="meta-value">Roper Technologies</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Pricing</span>
+                        <span class="meta-value">$79-300+/mo (modules)</span>
+                    </div>
+                </div>
+
+                <div class="difficulty difficulty-medium">
+                    <strong>Difficulty to Compete:</strong> MEDIUM — Loyal but aging base. Win on modern UX + camps + simplicity.
+                </div>
+            </div>
+
+            <!-- HiMama/Lillio -->
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <span class="competitor-name"><a href="https://www.lillio.com" target="_blank">Lillio (HiMama)</a></span>
+                    <div class="competitor-badges">
+                        <span class="badge badge-rising">Growing</span>
+                    </div>
+                </div>
+
+                <div class="competitor-grid">
+                    <div class="pros-cons">
+                        <h4 class="pros">✓ Why customers stay</h4>
+                        <ul>
+                            <li>Excellent parent engagement</li>
+                            <li>Strong developmental tracking</li>
+                            <li>Lillio Academy curriculum</li>
+                            <li>Canadian roots (strong in Canada)</li>
+                            <li>10,000+ centers using platform</li>
+                        </ul>
+                    </div>
+                    <div class="pros-cons">
+                        <h4 class="cons">✗ Weaknesses / Gaps</h4>
+                        <ul>
+                            <li>Billing features lag behind</li>
+                            <li>No camp features at all</li>
+                            <li>Limited scheduling tools</li>
+                            <li>Per-child pricing model</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="competitor-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Founded</span>
+                        <span class="meta-value">2013 (Toronto)</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Employees</span>
+                        <span class="meta-value">~98</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Funding</span>
+                        <span class="meta-value">$70M (Bain Capital)</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Children Served</span>
+                        <span class="meta-value">1M+ families</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Pricing</span>
+                        <span class="meta-value">$3-5/child/mo</span>
+                    </div>
+                </div>
+
+                <div class="difficulty difficulty-medium">
+                    <strong>Difficulty to Compete:</strong> MEDIUM — Strong in Canada. Win on camps + billing + flat pricing.
+                </div>
+            </div>
+
+            <!-- Tadpoles -->
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <span class="competitor-name"><a href="https://www.tadpoles.com" target="_blank">Tadpoles</a></span>
+                    <div class="competitor-badges">
+                        <span class="badge badge-acquired">Owned by Teaching Strategies</span>
+                    </div>
+                </div>
+
+                <div class="competitor-grid">
+                    <div class="pros-cons">
+                        <h4 class="pros">✓ Why customers stay</h4>
+                        <ul>
+                            <li>GOLD assessment integration</li>
+                            <li>500K+ children served daily</li>
+                            <li>Strong in Head Start programs</li>
+                            <li>Bundled with curriculum</li>
+                        </ul>
+                    </div>
+                    <div class="pros-cons">
+                        <h4 class="cons">✗ Weaknesses / Gaps</h4>
+                        <ul>
+                            <li>Ecosystem lock-in</li>
+                            <li>Limited billing features</li>
+                            <li>No camp features</li>
+                            <li>Tied to TS curriculum</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="competitor-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Owner</span>
+                        <span class="meta-value">Teaching Strategies</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scale</span>
+                        <span class="meta-value">430K+ families</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Focus</span>
+                        <span class="meta-value">Curriculum integration</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Pricing</span>
+                        <span class="meta-value">Enterprise/bundled</span>
+                    </div>
+                </div>
+
+                <div class="difficulty difficulty-hard">
+                    <strong>Difficulty to Compete:</strong> HARD — Locked into Teaching Strategies ecosystem. Not a direct target.
+                </div>
+            </div>
+
+            <!-- Playground -->
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <span class="competitor-name"><a href="https://www.tryplayground.com" target="_blank">Playground</a></span>
+                    <div class="competitor-badges">
+                        <span class="badge badge-rising">Rising Challenger</span>
+                    </div>
+                </div>
+
+                <div class="competitor-grid">
+                    <div class="pros-cons">
+                        <h4 class="pros">✓ Why customers stay</h4>
+                        <ul>
+                            <li>Modern, clean UX</li>
+                            <li>Fast support (60-sec response)</li>
+                            <li>4.8/5 star ratings</li>
+                            <li>Free tier available</li>
+                            <li>3,000+ programs</li>
+                        </ul>
+                    </div>
+                    <div class="pros-cons">
+                        <h4 class="cons">✗ Weaknesses / Gaps</h4>
+                        <ul>
+                            <li>Newer, less proven</li>
+                            <li>No camp features</li>
+                            <li>Limited enterprise features</li>
+                            <li>Smaller company</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="competitor-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Founded</span>
+                        <span class="meta-value">2021 (LA)</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Employees</span>
+                        <span class="meta-value">~44</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Funding</span>
+                        <span class="meta-value">$3.35M</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Pricing</span>
+                        <span class="meta-value">Free tier + paid</span>
+                    </div>
+                </div>
+
+                <div class="difficulty difficulty-easy">
+                    <strong>Difficulty to Compete:</strong> EASIER — Similar stage. Win on camps + features + same modern UX.
+                </div>
+            </div>
+
+            <!-- Famly -->
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <span class="competitor-name"><a href="https://www.famly.co" target="_blank">Famly</a></span>
+                    <div class="competitor-badges">
+                        <span class="badge badge-rising">European Leader</span>
+                    </div>
+                </div>
+
+                <div class="competitor-grid">
+                    <div class="pros-cons">
+                        <h4 class="pros">✓ Why customers stay</h4>
+                        <ul>
+                            <li>Strong in Europe (UK, Germany, Denmark)</li>
+                            <li>Multilingual support (20+ languages)</li>
+                            <li>GDPR-compliant from the start</li>
+                            <li>Clean, modern interface</li>
+                            <li>7,000+ centers globally</li>
+                            <li>Good parent engagement tools</li>
+                        </ul>
+                    </div>
+                    <div class="pros-cons">
+                        <h4 class="cons">✗ Weaknesses / Gaps</h4>
+                        <ul>
+                            <li>No camp features</li>
+                            <li>Weaker in North America</li>
+                            <li>Custom pricing (less transparent)</li>
+                            <li>Smaller US presence</li>
+                            <li>No session-based enrollment</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="competitor-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Founded</span>
+                        <span class="meta-value">2013 (Copenhagen)</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Employees</span>
+                        <span class="meta-value">~60-80</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Funding</span>
+                        <span class="meta-value">$24.5M (Series A)</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Market Share</span>
+                        <span class="meta-value">~0.21% global</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Investors</span>
+                        <span class="meta-value">Susquehanna Growth</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Pricing</span>
+                        <span class="meta-value">Custom quotes</span>
+                    </div>
+                </div>
+
+                <div class="difficulty difficulty-easy">
+                    <strong>Difficulty to Compete:</strong> EASIER — European focus, limited North American presence. Win on camps + US market focus.
+                </div>
+            </div>
+        </section>
+
+        <!-- CAMP COMPETITORS -->
+        <section class="section" id="camps">
+            <h2 class="section-title">Camp Software Competitors</h2>
+
+            <!-- CampMinder -->
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <span class="competitor-name"><a href="https://campminder.com" target="_blank">CampMinder</a></span>
+                    <div class="competitor-badges">
+                        <span class="badge badge-leader">Market Leader (~28%)</span>
+                    </div>
+                </div>
+
+                <div class="competitor-grid">
+                    <div class="pros-cons">
+                        <h4 class="pros">✓ Why customers stay</h4>
+                        <ul>
+                            <li>Industry standard for camps</li>
+                            <li>Campanion app (photo facial rec)</li>
+                            <li>Health center module</li>
+                            <li>Cabin/bunk assignments</li>
+                            <li>25+ years of trust</li>
+                        </ul>
+                    </div>
+                    <div class="pros-cons">
+                        <h4 class="cons">✗ Weaknesses / Gaps</h4>
+                        <ul>
+                            <li>No daily activity logging</li>
+                            <li>No real-time parent updates</li>
+                            <li>No year-round childcare ops</li>
+                            <li>No recurring tuition billing</li>
+                            <li>Web-wrapper mobile apps</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="competitor-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Founded</span>
+                        <span class="meta-value">2001 (Boulder)</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Employees</span>
+                        <span class="meta-value">~87</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Market Share</span>
+                        <span class="meta-value">~28% of camps</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Revenue (est.)</span>
+                        <span class="meta-value">$10-35M/year</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Pricing</span>
+                        <span class="meta-value">$9-31/camper/year</span>
+                    </div>
+                </div>
+
+                <div class="difficulty difficulty-medium">
+                    <strong>Difficulty to Compete:</strong> MEDIUM — Strong in overnight camps. Win on day camps + year-round + daily ops.
+                </div>
+            </div>
+
+            <!-- CampBrain -->
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <span class="competitor-name"><a href="https://www.campbrain.com" target="_blank">CampBrain</a></span>
+                    <div class="competitor-badges">
+                        <span class="badge badge-legacy">Legacy (~18%)</span>
+                        <span class="badge badge-acquired">Acquired by Vermont Systems 2023</span>
+                    </div>
+                </div>
+
+                <div class="competitor-grid">
+                    <div class="pros-cons">
+                        <h4 class="pros">✓ Why customers stay</h4>
+                        <ul>
+                            <li>30+ years experience</li>
+                            <li>Strong cabin assignments</li>
+                            <li>Conference center support</li>
+                            <li>Multi-country (5 countries)</li>
+                            <li>1M+ campers registered/year</li>
+                        </ul>
+                    </div>
+                    <div class="pros-cons">
+                        <h4 class="cons">✗ Weaknesses / Gaps</h4>
+                        <ul>
+                            <li>Legacy, dated interface</li>
+                            <li>Limited mobile experience</li>
+                            <li>No year-round operations</li>
+                            <li>Quote-only pricing</li>
+                            <li>Small team (~30-45)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="competitor-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Founded</span>
+                        <span class="meta-value">1994 (Toronto)</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Employees</span>
+                        <span class="meta-value">~33-45</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Market Share</span>
+                        <span class="meta-value">~18%</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Revenue (est.)</span>
+                        <span class="meta-value">~$3.8M/year</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Pricing</span>
+                        <span class="meta-value">Custom quotes</span>
+                    </div>
+                </div>
+
+                <div class="difficulty difficulty-easy">
+                    <strong>Difficulty to Compete:</strong> EASIER — Legacy tech, small team. Win on modern UX + transparent pricing.
+                </div>
+            </div>
+
+            <!-- ACTIVE Network -->
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <span class="competitor-name"><a href="https://www.activenetwork.com/camps" target="_blank">ACTIVE Network</a></span>
+                    <div class="competitor-badges">
+                        <span class="badge badge-enterprise">Enterprise (~55%)</span>
+                        <span class="badge badge-acquired">Owned by Global Payments</span>
+                    </div>
+                </div>
+
+                <div class="competitor-grid">
+                    <div class="pros-cons">
+                        <h4 class="pros">✓ Why customers stay</h4>
+                        <ul>
+                            <li>Enterprise-grade scale</li>
+                            <li>Parks & Rec / municipal focus</li>
+                            <li>Multi-program support</li>
+                            <li>Deep integrations</li>
+                        </ul>
+                    </div>
+                    <div class="pros-cons">
+                        <h4 class="cons">✗ Weaknesses / Gaps</h4>
+                        <ul>
+                            <li>Very expensive (% of revenue)</li>
+                            <li>Not camp-specialized</li>
+                            <li>Complex implementation</li>
+                            <li>Overkill for most camps</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="competitor-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Owner</span>
+                        <span class="meta-value">Global Payments</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Market Share</span>
+                        <span class="meta-value">~55% (includes all)</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Target</span>
+                        <span class="meta-value">Large municipalities</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Pricing</span>
+                        <span class="meta-value">3-7% of revenue</span>
+                    </div>
+                </div>
+
+                <div class="difficulty difficulty-hard">
+                    <strong>Difficulty to Compete:</strong> HARD — Enterprise lock-in. Not our target. Focus on SMB camps instead.
+                </div>
+            </div>
+
+            <!-- Sawyer -->
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <span class="competitor-name"><a href="https://www.hisawyer.com" target="_blank">Sawyer</a></span>
+                    <div class="competitor-badges">
+                        <span class="badge badge-acquired">Acquired by DaySmart 2023</span>
+                    </div>
+                </div>
+
+                <div class="competitor-grid">
+                    <div class="pros-cons">
+                        <h4 class="pros">✓ Why customers stay</h4>
+                        <ul>
+                            <li>Great for classes/activities</li>
+                            <li>Parent marketplace for discovery</li>
+                            <li>Clean, modern interface</li>
+                            <li>Good for enrichment programs</li>
+                        </ul>
+                    </div>
+                    <div class="pros-cons">
+                        <h4 class="cons">✗ Weaknesses / Gaps</h4>
+                        <ul>
+                            <li>Not full camp solution</li>
+                            <li>No residential features</li>
+                            <li>No childcare daily ops</li>
+                            <li>Better for one-off classes</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="competitor-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Founded</span>
+                        <span class="meta-value">2015 (Brooklyn)</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Employees</span>
+                        <span class="meta-value">25-100</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Funding</span>
+                        <span class="meta-value">$18-23M raised</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Pricing</span>
+                        <span class="meta-value">$129-329+/mo</span>
+                    </div>
+                </div>
+
+                <div class="difficulty difficulty-easy">
+                    <strong>Difficulty to Compete:</strong> EASIER — Different focus (classes). Win on full camp/childcare ops.
+                </div>
+            </div>
+
+            <!-- Regpack -->
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <span class="competitor-name"><a href="https://www.regpacks.com" target="_blank">Regpack</a></span>
+                    <div class="competitor-badges">
+                        <span class="badge badge-legacy">Registration Only</span>
+                    </div>
+                </div>
+
+                <div class="competitor-grid">
+                    <div class="pros-cons">
+                        <h4 class="pros">✓ Why customers stay</h4>
+                        <ul>
+                            <li>Best-in-class form builder</li>
+                            <li>Excellent payment plans</li>
+                            <li>Strong scholarship support</li>
+                            <li>Very flexible registration</li>
+                        </ul>
+                    </div>
+                    <div class="pros-cons">
+                        <h4 class="cons">✗ Weaknesses / Gaps</h4>
+                        <ul>
+                            <li>Registration ONLY — no ops</li>
+                            <li>No daily attendance</li>
+                            <li>No communication tools</li>
+                            <li>No parent app</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="competitor-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Focus</span>
+                        <span class="meta-value">Registration forms only</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Limitation</span>
+                        <span class="meta-value">No daily operations</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Pricing</span>
+                        <span class="meta-value">$125-400+/mo</span>
+                    </div>
+                </div>
+
+                <div class="difficulty difficulty-easy">
+                    <strong>Difficulty to Compete:</strong> EASY — Only does registration. Win on full operations platform.
+                </div>
+            </div>
+        </section>
+
+        <!-- FULL FEATURE MATRIX -->
+        <section class="section" id="matrix">
+            <h2 class="section-title">Full Feature Comparison Matrix</h2>
+
+            <div class="table-wrapper">
+                <table class="matrix-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th class="bloomily-col">Bloomily</th>
+                            <th>Brightwheel</th>
+                            <th>ProCare</th>
+                            <th>Famly</th>
+                            <th>CampMinder</th>
+                            <th>CampBrain</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>CHILDCARE OPS</strong></td>
+                            <td class="bloomily-col"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Year-round childcare</td>
+                            <td class="check bloomily-col">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td>Daily activity logging</td>
+                            <td class="check bloomily-col">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td>Meal/nap/diaper tracking</td>
+                            <td class="check bloomily-col">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td>Recurring tuition billing</td>
+                            <td class="check bloomily-col">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CAMP OPS</strong></td>
+                            <td class="bloomily-col"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Camp registration</td>
+                            <td class="check bloomily-col">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Session-based enrollment</td>
+                            <td class="check bloomily-col">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Activity/track selection</td>
+                            <td class="check bloomily-col">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Cabin/bunk assignment</td>
+                            <td class="cross bloomily-col">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BOTH IN ONE</strong></td>
+                            <td class="check bloomily-col"><strong>✓</strong></td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TECHNOLOGY</strong></td>
+                            <td class="bloomily-col"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Native mobile apps</td>
+                            <td class="check bloomily-col">✓</td>
+                            <td class="partial">⚠</td>
+                            <td class="partial">⚠</td>
+                            <td class="partial">⚠</td>
+                            <td class="partial">⚠</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td>NFC tap check-in</td>
+                            <td class="check bloomily-col">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td>AI predictions</td>
+                            <td class="check bloomily-col">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td>Website builder included</td>
+                            <td class="check bloomily-col">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td>Multilingual (20+ languages)</td>
+                            <td class="cross bloomily-col">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PRICING</strong></td>
+                            <td class="bloomily-col"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Flat pricing (no per-child)</td>
+                            <td class="check bloomily-col">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="partial">⚠</td>
+                            <td class="partial">⚠</td>
+                            <td class="cross">✗</td>
+                            <td class="partial">⚠</td>
+                        </tr>
+                        <tr>
+                            <td><strong>WHAT THEY HAVE WE DON'T</strong></td>
+                            <td class="bloomily-col"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Built-in payroll</td>
+                            <td class="cross bloomily-col">✗</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td>Photo facial recognition</td>
+                            <td class="cross bloomily-col">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td>Health center module</td>
+                            <td class="cross bloomily-col">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p style="font-size: 0.8rem; color: var(--gray-500); margin-top: 8px;">
+                ✓ = Full support | ⚠ = Partial/limited | ✗ = Not available
+            </p>
+        </section>
+
+        <!-- PRICING STRATEGY -->
+        <section class="section" id="pricing">
+            <h2 class="section-title">Pricing Comparison & Strategy</h2>
+
+            <h3 class="section-subtitle">Childcare Pricing (75-child center)</h3>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Platform</th>
+                            <th>Pricing Model</th>
+                            <th>Est. Monthly Cost</th>
+                            <th>Annual Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: var(--success-bg);">
+                            <td><strong>Bloomily</strong></td>
+                            <td>Flat tier</td>
+                            <td><strong>$79-159</strong></td>
+                            <td><strong>$948-1,908</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Brightwheel</td>
+                            <td>~$4/child</td>
+                            <td>~$300</td>
+                            <td>~$3,600</td>
+                        </tr>
+                        <tr>
+                            <td>ProCare</td>
+                            <td>Module-based</td>
+                            <td>$150-250</td>
+                            <td>$1,800-3,000</td>
+                        </tr>
+                        <tr>
+                            <td>HiMama/Lillio</td>
+                            <td>~$4/child</td>
+                            <td>~$300</td>
+                            <td>~$3,600</td>
+                        </tr>
+                        <tr>
+                            <td>Playground</td>
+                            <td>Free + premium</td>
+                            <td>$0-200</td>
+                            <td>$0-2,400</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="section-subtitle">Camp Pricing (200 campers)</h3>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Platform</th>
+                            <th>Pricing Model</th>
+                            <th>Est. Annual Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: var(--success-bg);">
+                            <td><strong>Bloomily</strong></td>
+                            <td>Flat monthly ($239/mo)</td>
+                            <td><strong>$2,868</strong></td>
+                        </tr>
+                        <tr>
+                            <td>CampMinder</td>
+                            <td>$9-31/camper</td>
+                            <td>$1,800-6,200</td>
+                        </tr>
+                        <tr>
+                            <td>CampBrain</td>
+                            <td>Custom quote</td>
+                            <td>$1,500-3,600</td>
+                        </tr>
+                        <tr>
+                            <td>ACTIVE Network</td>
+                            <td>3-7% of revenue</td>
+                            <td>Varies (expensive)</td>
+                        </tr>
+                        <tr>
+                            <td>Sawyer</td>
+                            <td>Monthly flat</td>
+                            <td>$1,548-3,948</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout callout-success">
+                <div class="callout-title">The Hybrid Advantage</div>
+                <p><strong>Organization running both childcare (75 kids) AND camps (200 campers):</strong></p>
+                <ul style="margin: 12px 0 0 20px;">
+                    <li>Brightwheel + CampMinder: <strong>$5,400 - $10,000+/year</strong></li>
+                    <li>Bloomily (bundled): <strong>~$3,600/year</strong></li>
+                    <li><strong>Savings: 40-65%</strong></li>
+                </ul>
+            </div>
+
+            <div class="strategy-box">
+                <h4>Pricing Strategy: How We Win</h4>
+                <ul>
+                    <li><strong>Flat pricing removes growth penalty</strong> — competitors punish success with per-child fees</li>
+                    <li><strong>Bundle both = instant savings</strong> — no one else can offer unified pricing</li>
+                    <li><strong>50-70% cheaper than Brightwheel</strong> for childcare-only customers</li>
+                    <li><strong>Predictable budgeting</strong> — directors can plan without surprise cost increases</li>
+                    <li><strong>Free tier consideration</strong> — could match Playground to eliminate price objection</li>
+                </ul>
+            </div>
+
+            <h3 class="section-subtitle">Billing Revenue Opportunity</h3>
+
+            <div class="callout callout-success">
+                <div class="callout-title">💰 Hidden Revenue: Payment Processing Margins</div>
+                <p style="margin-bottom: 12px;">When centers collect payments through our platform, we earn the spread between what we charge and what Stripe charges us.</p>
+
+                <div class="table-wrapper" style="margin: 16px 0;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Example (100-child center)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Avg. monthly tuition/child</td>
+                                <td>$1,500</td>
+                            </tr>
+                            <tr>
+                                <td>Monthly payment volume</td>
+                                <td>$150,000</td>
+                            </tr>
+                            <tr>
+                                <td>What we charge (3.2%)</td>
+                                <td><strong>$4,800</strong></td>
+                            </tr>
+                            <tr>
+                                <td>What Stripe charges us (2.9% + $0.30/txn)</td>
+                                <td>$4,350 + ~$30 = <strong>~$4,380</strong></td>
+                            </tr>
+                            <tr style="background: var(--success-bg);">
+                                <td><strong>Our margin per month</strong></td>
+                                <td><strong>~$420 (0.3% net spread)</strong></td>
+                            </tr>
+                            <tr style="background: var(--success-bg);">
+                                <td><strong>Annual billing revenue per center</strong></td>
+                                <td><strong>~$5,000</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p style="font-size: 0.9rem;"><strong>At scale:</strong> 100 centers × $5,000 = <strong>$500K/year</strong> in payment processing revenue — on top of subscription fees.</p>
+            </div>
+
+            <h3 class="section-subtitle">Why Centers Switch to Modern Software</h3>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-title">⏱️ Saves Time & Money</div>
+                    <p style="font-size: 0.9rem; color: var(--gray-600);">
+                        Automated daily reports, billing, and attendance tracking eliminate hours of manual work. Directors spend less time on admin and more on what matters.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-title">✨ Modern & Professional</div>
+                    <p style="font-size: 0.9rem; color: var(--gray-600);">
+                        Modern software = modern center perception. Parents see professional apps and assume quality operations. First impressions matter.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📝 Paperless Enrollment</div>
+                    <p style="font-size: 0.9rem; color: var(--gray-600);">
+                        Digital forms, e-signatures, and online registration eliminate paper chaos. No more lost forms, filing cabinets, or manual data entry.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-title">👥 Reduces Staffing Costs</div>
+                    <p style="font-size: 0.9rem; color: var(--gray-600);">
+                        Automation means less admin staff needed. One person can manage what used to require multiple employees for billing, enrollment, and communication.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🌐 Online Visibility</div>
+                    <p style="font-size: 0.9rem; color: var(--gray-600);">
+                        Website builder + online enrollment = parents can discover and sign up 24/7. Centers without online presence lose families to competitors who have it.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📈 Easier Parent Acquisition</div>
+                    <p style="font-size: 0.9rem; color: var(--gray-600);">
+                        Frictionless enrollment converts more leads. Parents who can sign up in 10 minutes at midnight don't wait for business hours or fill out PDFs.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW TO COMPETE -->
+        <section class="section" id="compete">
+            <h2 class="section-title">How to Compete & Win</h2>
+
+            <h3 class="section-subtitle">Competition Difficulty Summary</h3>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Competitor</th>
+                            <th>Difficulty</th>
+                            <th>Target Customers to Win</th>
+                            <th>Key Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Brightwheel</strong></td>
+                            <td style="background: var(--danger-bg); color: #B91C1C;">HARD</td>
+                            <td>Centers that also run camps</td>
+                            <td>"Plus camps, no per-child fees"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ProCare</strong></td>
+                            <td style="background: var(--warning-bg); color: #B45309;">MEDIUM</td>
+                            <td>Frustrated with complexity/UX</td>
+                            <td>"Modern + easy, plus camps"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>HiMama/Lillio</strong></td>
+                            <td style="background: var(--warning-bg); color: #B45309;">MEDIUM</td>
+                            <td>Canadian market, camp-curious</td>
+                            <td>"Better billing + camps included"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tadpoles</strong></td>
+                            <td style="background: var(--danger-bg); color: #B91C1C;">HARD</td>
+                            <td>Not a direct target (ecosystem)</td>
+                            <td>Skip — locked into TS curriculum</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Playground</strong></td>
+                            <td style="background: var(--success-bg); color: #047857;">EASIER</td>
+                            <td>Growing centers needing camps</td>
+                            <td>"Same modern UX + camps"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CampMinder</strong></td>
+                            <td style="background: var(--warning-bg); color: #B45309;">MEDIUM</td>
+                            <td>Day camps, hybrid organizations</td>
+                            <td>"Plus year-round + daily ops"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CampBrain</strong></td>
+                            <td style="background: var(--success-bg); color: #047857;">EASIER</td>
+                            <td>Frustrated with legacy UX</td>
+                            <td>"Modern UX + transparent pricing"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ACTIVE</strong></td>
+                            <td style="background: var(--danger-bg); color: #B91C1C;">HARD</td>
+                            <td>Not a target (enterprise)</td>
+                            <td>Skip — focus on SMB camps</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sawyer</strong></td>
+                            <td style="background: var(--success-bg); color: #047857;">EASIER</td>
+                            <td>Growing beyond classes to camps</td>
+                            <td>"Full camp ops, not just classes"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Regpack</strong></td>
+                            <td style="background: var(--success-bg); color: #047857;">EASY</td>
+                            <td>Anyone needing daily operations</td>
+                            <td>"Registration + full operations"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Famly</strong></td>
+                            <td style="background: var(--success-bg); color: #047857;">EASIER</td>
+                            <td>North American centers, camp-curious</td>
+                            <td>"US-focused + camps included"</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="section-subtitle">What We Need to Build/Improve</h3>
+
+            <div class="callout callout-warning">
+                <div class="callout-title">Gaps to Address for Competitive Parity</div>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Payroll integration</strong> — Brightwheel & ProCare have it; we should integrate with Gusto/ADP</li>
+                    <li><strong>Cabin/bunk assignment</strong> — CampMinder & CampBrain have it for overnight camps</li>
+                    <li><strong>Health center module</strong> — Important for overnight camps (medication tracking, nurse notes)</li>
+                    <li><strong>CACFP food program</strong> — ProCare strength; needed for Head Start/subsidized centers</li>
+                    <li><strong>Photo facial recognition</strong> — CampMinder's Campanion has it (nice-to-have, not critical)</li>
+                </ul>
+            </div>
+
+            <h3 class="section-subtitle">Our Unfair Advantages</h3>
+
+            <div class="callout callout-success">
+                <div class="callout-title">What No Competitor Can Match</div>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Unified platform</strong> — Only one serving both childcare AND camps architecturally</li>
+                    <li><strong>NFC tap check-in</strong> — No competitor has contactless tap check-in</li>
+                    <li><strong>4 enrollment modes</strong> — Most flexible camp registration in market</li>
+                    <li><strong>AI predictions</strong> — Staffing, arrivals, no-shows — no one else has this</li>
+                    <li><strong>True native apps</strong> — SwiftUI + Kotlin, not web wrappers</li>
+                    <li><strong>Website builder included</strong> — No extra Wix/Squarespace needed</li>
+                    <li><strong>Modern tech stack</strong> — Built 2025-2026, not legacy code from 1990s</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- RISKS & CHALLENGES -->
+        <section class="section" id="risks">
+            <h2 class="section-title">Risks & Challenges (Honest Assessment)</h2>
+
+            <p style="margin-bottom: 16px;">No opportunity is without risk. Here's an honest look at the challenges we face.</p>
+
+            <div class="callout callout-danger">
+                <div class="callout-title">⚠️ Sales Cycle & Customer Acquisition</div>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Directors are risk-averse.</strong> They won't switch software on a whim. References, case studies, and trust take time to build.</li>
+                    <li><strong>Switching costs are real.</strong> Migrating data, retraining staff, and updating parent accounts is painful. Inertia favors incumbents.</li>
+                    <li><strong>Decision cycles are slow.</strong> Budget decisions often happen annually. A "yes" in March might mean onboarding in August.</li>
+                    <li><strong>Word of mouth is everything.</strong> Directors talk to each other. One bad experience spreads fast.</li>
+                </ul>
+            </div>
+
+            <div class="callout callout-warning">
+                <div class="callout-title">🏢 Competitive Response</div>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Brightwheel has deep pockets.</strong> $600M+ raised means they can outspend us on marketing, support, and features.</li>
+                    <li><strong>Incumbents could add camps.</strong> Brightwheel or ProCare could bolt on camp features (though architectural limitations make this hard).</li>
+                    <li><strong>Camp players could add childcare.</strong> CampMinder could try to expand (same architectural challenge, but possible).</li>
+                    <li><strong>Price wars are possible.</strong> If we gain traction, competitors may drop prices to defend territory.</li>
+                </ul>
+            </div>
+
+            <div class="callout callout-info">
+                <div class="callout-title">📦 Product & Execution</div>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Feature parity gaps.</strong> We lack some features competitors have (payroll, cabin assignments, health center module). Prioritization is key.</li>
+                    <li><strong>Support scaling.</strong> Childcare directors expect responsive support. Scaling support while keeping quality is hard.</li>
+                    <li><strong>Reliability is non-negotiable.</strong> If check-in goes down during drop-off, trust is destroyed. Uptime must be exceptional.</li>
+                    <li><strong>Mobile app quality bar is high.</strong> Parents compare us to consumer apps. Anything clunky feels unacceptable.</li>
+                </ul>
+            </div>
+
+            <div class="callout callout-primary">
+                <div class="callout-title">🎯 Market Risks</div>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Economic sensitivity.</strong> Childcare is semi-discretionary. Recessions lead to enrollment drops and center closures.</li>
+                    <li><strong>Regulatory changes.</strong> State licensing requirements and subsidy rules change. Software must adapt quickly.</li>
+                    <li><strong>Market concentration.</strong> PE firms are rolling up childcare centers into chains. Large chains may build or demand custom solutions.</li>
+                </ul>
+            </div>
+
+            <h3 class="section-subtitle">Why We Think We Can Win Anyway</h3>
+
+            <div class="strategy-box">
+                <h4>Our Advantages Outweigh the Risks</h4>
+                <ul>
+                    <li><strong>Architectural moat:</strong> Competitors can't easily serve both markets — it's not a feature, it's a rebuild.</li>
+                    <li><strong>Greenfield segment:</strong> Hybrid organizations are underserved. We can win them without competing head-to-head.</li>
+                    <li><strong>Modern stack:</strong> We can ship features faster than legacy competitors drowning in technical debt.</li>
+                    <li><strong>Flat pricing:</strong> Directors love predictability. Per-child fees are a genuine pain point we solve.</li>
+                    <li><strong>Focus:</strong> Big competitors are spread thin. We can out-execute in our niche.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- KEY TAKEAWAYS -->
+        <section class="section" id="takeaways">
+            <h2 class="section-title">Key Takeaways</h2>
+
+            <div class="key-point">
+                <span class="key-point-number">1</span>
+                <div>
+                    <strong>Two separate $500M+ markets</strong> (childcare + camps) have never been unified — until Bloomily. This is architectural, not a feature bolt-on.
+                </div>
+            </div>
+
+            <div class="key-point">
+                <span class="key-point-number">2</span>
+                <div>
+                    <strong>Hybrid organizations are underserved</strong> — community centers, preschools with camps, and churches are forced to use two systems.
+                </div>
+            </div>
+
+            <div class="key-point">
+                <span class="key-point-number">3</span>
+                <div>
+                    <strong>Brightwheel is the main childcare competitor</strong> (~500 employees, $600M+ raised). Win on camps + flat pricing.
+                </div>
+            </div>
+
+            <div class="key-point">
+                <span class="key-point-number">4</span>
+                <div>
+                    <strong>CampMinder dominates camps (~28%)</strong> but can't do childcare. Win on year-round + daily operations.
+                </div>
+            </div>
+
+            <div class="key-point">
+                <span class="key-point-number">5</span>
+                <div>
+                    <strong>Easiest targets:</strong> CampBrain (legacy UX), Regpack (registration only), Sawyer (classes not camps), Playground (no camps).
+                </div>
+            </div>
+
+            <div class="key-point">
+                <span class="key-point-number">6</span>
+                <div>
+                    <strong>Directors are risk-averse</strong> — trust and references matter more than features. Build case studies.
+                </div>
+            </div>
+
+            <div class="key-point">
+                <span class="key-point-number">7</span>
+                <div>
+                    <strong>Flat pricing is rare and compelling</strong> — most charge per-child/per-camper. Growth doesn't cost more with Bloomily.
+                </div>
+            </div>
+
+            <div class="key-point">
+                <span class="key-point-number">8</span>
+                <div>
+                    <strong>Canada is a strong opportunity</strong> — HiMama/Lillio are Toronto-based but lack camps. 21% annual platform growth.
+                </div>
+            </div>
+
+            <div class="key-point">
+                <span class="key-point-number">9</span>
+                <div>
+                    <strong>Modern tech is an advantage</strong> — most competitors have 10-30 year old codebases. We're built on 2025-2026 stack.
+                </div>
+            </div>
+
+            <div class="key-point">
+                <span class="key-point-number">10</span>
+                <div>
+                    <strong>The market is growing 7-8% annually</strong> and increasingly digital. Combined TAM reaches $1B+ by 2030.
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p><strong>Bloomily Market Primer</strong> • January 2026</p>
+            <p style="margin-top: 4px;">For internal use only</p>
+        </footer>
+    </div>
+
+    <!-- PostHog Analytics - tracks visitors, referrers, and page views -->
+    <script>
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+
+        // Initialize PostHog
+        posthog.init('phc_lSZIvFS3le4QuBHpeJv6DUbIV0xpFSr7g85KTfQAYr6', {
+            api_host: 'https://us.i.posthog.com',
+            person_profiles: 'identified_only',
+            capture_pageview: true,
+            capture_pageleave: true
+        });
+
+        // Capture page view with referrer information
+        posthog.capture('market_primer_viewed', {
+            document: 'Bloomily Market Primer',
+            referrer: document.referrer || 'direct',
+            landing_page: window.location.href
+        });
+    </script>
+</body>
+</html>
